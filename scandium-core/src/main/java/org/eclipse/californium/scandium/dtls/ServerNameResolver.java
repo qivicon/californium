@@ -17,7 +17,7 @@ package org.eclipse.californium.scandium.dtls;
 
 import java.net.InetSocketAddress;
 
-import org.eclipse.californium.scandium.util.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerNames;
 
 /**
  * Resolves IP addresses to server names.

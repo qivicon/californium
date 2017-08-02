@@ -13,7 +13,7 @@
  * Contributors:
  *    Bosch Software Innovations - initial creation
  ******************************************************************************/
-package org.eclipse.californium.scandium.util;
+package org.eclipse.californium.scandium.util.api;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;

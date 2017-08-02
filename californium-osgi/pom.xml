@@ -17,7 +17,8 @@
 	<description>OSGi wrapper</description>
 
 	<properties>
-		<osgi.version>4.3.1</osgi.version>
+		<!-- <osgi.version>4.3.1</osgi.version> -->
+		<osgi.version>4.2.0</osgi.version>
 	</properties>
 	
 	<dependencies>
@@ -40,15 +41,21 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.9.5</version>
-			<scope>test</scope>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>scandium</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>element-connector</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -74,10 +81,10 @@
 							org.eclipse.californium.core.network.config,
 							org.eclipse.californium.core.network.interceptors,
 							org.eclipse.californium.core.network.stack,
+							org.eclipse.californium.core.network.deduplication.api,
 							org.eclipse.californium.core.observe,
 							org.eclipse.californium.core.server,
 							org.eclipse.californium.core.server.resources,
-							org.eclipse.californium.elements,
 							org.eclipse.californium.osgi
 						</Export-Package>
 						<Private-Package>
@@ -88,7 +95,7 @@
 						<Import-Package>
 							*
 						</Import-Package>
-						<Embed-Dependency>californium-core;inline=true,element-connector;inline=!about.html</Embed-Dependency>
+						<Embed-Dependency>californium-core;inline=true</Embed-Dependency>
 						<Bundle-SymbolicName>californium-osgi</Bundle-SymbolicName>
 					</instructions>
 				</configuration>

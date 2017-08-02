@@ -58,14 +58,14 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  * i.e. the service tracks Californium {@code Resource} instances being added to the OSGi service registry
  * and automatically adds them to the managed Californium {@code ServerInterface} instance.
  */
-public class ManagedServer implements ManagedService, ServiceTrackerCustomizer<Resource, Resource>, ServerEndpointRegistry {
+public class ManagedServer implements ManagedService, ServiceTrackerCustomizer, ServerEndpointRegistry {
 
 	private final static Logger LOGGER = Logger.getLogger(ManagedServer.class.getCanonicalName());
 	
 	private ServerInterface managedServer;
 	private boolean running = false;
 	private BundleContext context;
-	private ServiceTracker<Resource, Resource> resourceTracker;
+	private ServiceTracker resourceTracker;
 	private ServerInterfaceFactory serverFactory;
 	private EndpointFactory endpointFactory;
 	
@@ -136,8 +136,9 @@ public class ManagedServer implements ManagedService, ServiceTrackerCustomizer<R
 	 *  
 	 * @param properties the properties to set on the server
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public void updated(Dictionary<String, ?> properties)
+	public void updated(Dictionary properties)
 			throws ConfigurationException {
 
 		LOGGER.fine("Updating configuration of managed server instance");
@@ -148,7 +149,7 @@ public class ManagedServer implements ManagedService, ServiceTrackerCustomizer<R
 		
 		NetworkConfig networkConfig = NetworkConfig.createStandardWithoutFile();
 		if (properties != null) {
-			for (Enumeration<String> allKeys = properties.keys(); allKeys.hasMoreElements(); ) {
+			for (Enumeration<String> allKeys = (Enumeration<String>)properties.keys(); allKeys.hasMoreElements(); ) {
 				String key = allKeys.nextElement();
 				networkConfig.set(key, properties.get(key));
 			}
@@ -175,7 +176,7 @@ public class ManagedServer implements ManagedService, ServiceTrackerCustomizer<R
 		running = true;
 
 		// start tracking resources registered by arbitrary bundles
-		resourceTracker = new ServiceTracker<Resource, Resource>(context, Resource.class.getName(), this);
+		resourceTracker = new ServiceTracker(context, Resource.class.getName(), this);
 		resourceTracker.open();
 	}
 	
@@ -212,8 +213,8 @@ public class ManagedServer implements ManagedService, ServiceTrackerCustomizer<R
 	 * @return the unmodified {@code Resource}
 	 */
 	@Override
-	public Resource addingService(ServiceReference<Resource> reference) {
-		Resource resource = context.getService(reference);
+	public Resource addingService(ServiceReference reference) {
+		Resource resource = (Resource)context.getService(reference);
 		LOGGER.fine(String.format("Adding resource [%s]", resource.getName()));
 		if (resource != null) {
 			managedServer.add(resource);
@@ -228,13 +229,14 @@ public class ManagedServer implements ManagedService, ServiceTrackerCustomizer<R
 	 * a {@code Resource} is removed from the OSGi service registry.
 	 * 
 	 * @param reference the reference to the {@code Resource} service that has been removed
-	 * @param service the service object
+	 * @param object the service object
 	 */
 	@Override
-	public void removedService(ServiceReference<Resource> reference,
-			Resource service) {
-		LOGGER.fine(String.format("Removing resource [%s]", service.getName()));
-		managedServer.remove(service);
+	public void removedService(ServiceReference reference,
+			Object object) {
+		Resource serviceResource = (Resource)object;
+		LOGGER.fine(String.format("Removing resource [%s]", serviceResource.getName()));
+		managedServer.remove(serviceResource);
 		context.ungetService(reference);
 	}
 	
@@ -246,8 +248,8 @@ public class ManagedServer implements ManagedService, ServiceTrackerCustomizer<R
 	 * @param service the corresponding {@code Resource} instance
 	 */
 	@Override
-	public void modifiedService(ServiceReference<Resource> reference,
-			Resource service) {
+	public void modifiedService(ServiceReference reference,
+			Object service) {
 		// nothing to do
 	}
 

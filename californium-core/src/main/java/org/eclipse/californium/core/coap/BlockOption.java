@@ -217,14 +217,14 @@ public final class BlockOption {
 	 * <a href="https://tools.ietf.org/html/rfc7959#section-2.2">RFC 7959, Section 2.2</a>:
 	 * 
 	 * <pre>
-	 * 16 bytes = 2^4 --> 0
+	 * 16 bytes = 2^4 --&gt; 0
 	 * ... 
-	 * 1024 bytes = 2^10 -> 6
+	 * 1024 bytes = 2^10 -&gt; 6
 	 * </pre>
-	 * <p>
-	 * This method is tolerant towards <em>illegal</em> block sizes
+	 * 
+	 * <p>This method is tolerant towards <em>illegal</em> block sizes
 	 * that are &lt; 16 or &gt; 1024 bytes in that it will return the corresponding
-	 * codes for sizes 16 or 1024 respectively.
+	 * codes for sizes 16 or 1024 respectively.</p>
 	 * 
 	 * @param blockSize The block size in bytes.
 	 * @return The szx code for the largest number of bytes that is less than or equal to the block size.

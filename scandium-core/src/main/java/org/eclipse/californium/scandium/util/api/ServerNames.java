@@ -13,7 +13,7 @@
  * Contributors:
  *    Bosch Software Innovations - initial creation
  ******************************************************************************/
-package org.eclipse.californium.scandium.util;
+package org.eclipse.californium.scandium.util.api;
 
 import java.util.HashSet;
 import java.util.Iterator;

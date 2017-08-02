@@ -53,6 +53,7 @@
 							org.eclipse.californium.core.coap,
 							org.eclipse.californium.core.network,
 							org.eclipse.californium.core.network.config,
+							org.eclipse.californium.core.network.deduplication.api,
 							org.eclipse.californium.core.network.interceptors,
 							org.eclipse.californium.core.network.stack,
 							org.eclipse.californium.core.observe,

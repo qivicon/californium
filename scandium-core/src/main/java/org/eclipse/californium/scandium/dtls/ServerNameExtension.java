@@ -22,9 +22,9 @@ import org.eclipse.californium.elements.util.DatagramReader;
 import org.eclipse.californium.elements.util.DatagramWriter;
 import org.eclipse.californium.scandium.dtls.AlertMessage.AlertDescription;
 import org.eclipse.californium.scandium.dtls.AlertMessage.AlertLevel;
-import org.eclipse.californium.scandium.util.ServerName;
-import org.eclipse.californium.scandium.util.ServerName.NameType;
-import org.eclipse.californium.scandium.util.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerName;
+import org.eclipse.californium.scandium.util.api.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerName.NameType;
 
 /**
  * Conveys information specified by the <em>Server Name Indication</em> TLS extension.

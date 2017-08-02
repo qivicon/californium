@@ -47,8 +47,8 @@ import org.eclipse.californium.scandium.dtls.CertificateTypeExtension.Certificat
 import org.eclipse.californium.scandium.dtls.cipher.CipherSuite;
 import org.eclipse.californium.scandium.dtls.cipher.ECDHECryptography.SupportedGroup;
 import org.eclipse.californium.scandium.dtls.pskstore.StaticPskStore;
-import org.eclipse.californium.scandium.util.ServerNames;
-import org.eclipse.californium.scandium.util.ServerName.NameType;
+import org.eclipse.californium.scandium.util.api.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerName.NameType;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;

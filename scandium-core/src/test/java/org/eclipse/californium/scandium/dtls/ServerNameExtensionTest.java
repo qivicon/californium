@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 
 import org.eclipse.californium.scandium.category.Small;
 import org.eclipse.californium.scandium.dtls.HelloExtension.ExtensionType;
-import org.eclipse.californium.scandium.util.ServerName;
+import org.eclipse.californium.scandium.util.api.ServerName;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
