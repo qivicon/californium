@@ -8,7 +8,8 @@
 	<parent>
 		<groupId>org.eclipse.californium</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.1.0-SNAPSHOT</version>
+		<version>1.0.0.QIVICON-SNAPSHOT</version>
+		<!-- <version>1.1.0-SNAPSHOT</version> -->
 	</parent>
 	<artifactId>californium-core</artifactId>
 	<packaging>bundle</packaging>
@@ -53,6 +54,7 @@
 							org.eclipse.californium.core.coap,
 							org.eclipse.californium.core.network,
 							org.eclipse.californium.core.network.config,
+							org.eclipse.californium.core.network.deduplication.api,
 							org.eclipse.californium.core.network.interceptors,
 							org.eclipse.californium.core.network.stack,
 							org.eclipse.californium.core.observe,

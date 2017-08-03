@@ -3,7 +3,7 @@ package org.eclipse.californium.scandium.dtls.pskstore;
 import java.net.InetSocketAddress;
 import java.util.Arrays;
 
-import org.eclipse.californium.scandium.util.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerNames;
 
 /**
  * A simple in-memory pre-shared-key store.

@@ -19,6 +19,7 @@
  ******************************************************************************/
 package org.eclipse.californium.core.network.deduplication;
 
+import org.eclipse.californium.core.network.deduplication.api.Deduplicator;
 import org.eclipse.californium.core.network.Exchange;
 import org.eclipse.californium.core.network.Exchange.KeyMID;
 

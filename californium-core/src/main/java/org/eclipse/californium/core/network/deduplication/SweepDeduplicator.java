@@ -35,6 +35,7 @@ import org.eclipse.californium.core.Utils;
 import org.eclipse.californium.core.network.Exchange;
 import org.eclipse.californium.core.network.Exchange.KeyMID;
 import org.eclipse.californium.core.network.config.NetworkConfig;
+import org.eclipse.californium.core.network.deduplication.api.Deduplicator;
 import org.eclipse.californium.elements.util.DaemonThreadFactory;
 
 /**

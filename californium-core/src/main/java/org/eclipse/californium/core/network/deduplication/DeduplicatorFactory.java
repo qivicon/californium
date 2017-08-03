@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 
 import org.eclipse.californium.core.network.Matcher;
 import org.eclipse.californium.core.network.config.NetworkConfig;
+import org.eclipse.californium.core.network.deduplication.api.Deduplicator;
 
 
 /**

@@ -7,7 +7,10 @@
 
 	<groupId>org.eclipse.californium</groupId>
 	<artifactId>parent</artifactId>
+	<version>1.0.0.QIVICON-SNAPSHOT</version>
+	<!-- 
 	<version>1.1.0-SNAPSHOT</version>
+	-->
 	<packaging>pom</packaging>
 
 	<name>Californium (Cf) Parent</name>
@@ -106,28 +109,44 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.build.javaVersion>1.7</project.build.javaVersion>
 		<snapshotDependencyAllowed>true</snapshotDependencyAllowed>
+		
+		
+		<tycho-version>1.0.0</tycho-version>
+		<tycho-groupid>org.eclipse.tycho</tycho-groupid>
+		<tycho.testArgLine></tycho.testArgLine>
+		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+		
+		<nexus.host>qivicon-wbench.psst.t-online.corp</nexus.host>
+		<qivicon.orbit.p2.repository.url>http://${nexus.host}/nexus/content/unzip/2ndparty_unzip/com/qivicon/orbit/com.qivicon.orbit.repo/${qivicon.orbit.version}/com.qivicon.orbit.repo-${qivicon.orbit.version}.zip-unzip/</qivicon.orbit.p2.repository.url>
+		<esh.version>SNAPSHOT</esh.version>
+		<runtime.crs.version>SNAPSHOT</runtime.crs.version>
+		<prosyst.repository.version>SNAPSHOT</prosyst.repository.version>
+		<qivicon.orbit.version>1.0.25</qivicon.orbit.version>
+		<jersey.optimized.version>1.0.4</jersey.optimized.version>
+		<!-- p2 repository urls -->
+		<esh.p2.repository.url>http://${nexus.host}/nexus/content/unzip/snapshots_unzip/org/eclipse/smarthome/products/org.eclipse.smarthome.repo/${esh.version}/org.eclipse.smarthome.repo-${esh.version}.zip-unzip/</esh.p2.repository.url>
+		<runtime.crs.p2.repository.url>http://${nexus.host}/nexus/content/unzip/s_snapshots_unzip/com/qivicon/runtime/crs/com.qivicon.runtime.crs.repository/${runtime.crs.version}/com.qivicon.runtime.crs.repository-${runtime.crs.version}.zip-unzip/</runtime.crs.p2.repository.url>
+		<prosyst.p2.repository.url>http://${nexus.host}/nexus/content/unzip/snapshots_unzip/com/qivicon/runtime/prosyst-repository/${prosyst.repository.version}/prosyst-repository-${prosyst.repository.version}-bin.zip-unzip/</prosyst.p2.repository.url>
+		<!-- always using release versions from following repositories -->
+		<jersey.optimized.p2.repository.url>http://${nexus.host}/nexus/content/unzip/2ndparty_unzip/com/qivicon/jersey/com.qivicon.jersey.optimized.product/${jersey.optimized.version}/com.qivicon.jersey.optimized.product-${jersey.optimized.version}.zip-unzip/</jersey.optimized.p2.repository.url>
 	</properties>
+		
 
 	<distributionManagement>
-		<repository>
-			<id>repo.eclipse.org</id>
-			<name>Californium Repository - Releases</name>
-			<url>https://repo.eclipse.org/content/repositories/californium-releases/</url>
-		</repository>
 		<snapshotRepository>
-			<id>repo.eclipse.org</id>
-			<name>Californium Repository - Snapshots</name>
-			<url>https://repo.eclipse.org/content/repositories/californium-snapshots/</url>
+			<id>nexus-sec-snapshots</id>
+			<name>Nexus Secure Staging Repo</name>
+			<url>http://${nexus.host}/nexus/content/repositories/s_snapshots/</url>
+			<uniqueVersion>false</uniqueVersion>
 		</snapshotRepository>
+		<repository>
+			<id>nexus-sec-releases</id>
+			<name>Nexus Secure Release Repo</name>
+			<url>http://${nexus.host}/nexus/content/repositories/s_2ndparty/</url>
+		</repository>
 	</distributionManagement>
 
-	<repositories>
-		<repository>
-			<id>eclipse_snapshots</id>
-			<name>Eclipse Snapshots</name>
-			<url>https://repo.eclipse.org/content/repositories/snapshots/</url>
-		</repository>
-	</repositories>
+	
 
 	<dependencyManagement>
 		<dependencies>
@@ -292,8 +311,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 			</plugin>
+			<!--
 			<plugin>
-				<!-- 
+				 
 					Use the Nexus Staging plugin as a full replacement for the standard
 					Maven Deploy plugin.
 					See https://github.com/sonatype/nexus-maven-plugins/tree/master/staging/maven-plugin
@@ -305,7 +325,7 @@
 					makes sure that all artifacts of a multi-module project are deployed as a whole
 					at the end of the build process instead of deploying each module's artifacts
 					individually as part of building the module.
-				 -->
+				
 				<groupId>org.sonatype.plugins</groupId>
 				<artifactId>nexus-staging-maven-plugin</artifactId>
 				<version>1.6.5</version>
@@ -316,6 +336,7 @@
 					<autoReleaseAfterClose>false</autoReleaseAfterClose>
 				</configuration>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 
@@ -411,5 +432,113 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>Release</id>
+			<properties>
+				<packageVersion>AUTO</packageVersion>
+				<packageRepositoryUrl>http://${nexus.host}/nexus/content/repositories/spkg_rel/</packageRepositoryUrl>
+				<packageRepositoryId>nexus-sec-releases</packageRepositoryId>
+			</properties>
+		</profile>
+		<profile>
+			<id>tarot</id>
+			<modules>
+				<module>tarot</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>snapshot-version</id>
+			<properties>
+				<sprint-number>0</sprint-number>
+				<hotfix-number>0</hotfix-number>
+				<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+				<snapshot-build-version>1.${sprint-number}.${hotfix-number}-SNAPSHOT</snapshot-build-version>
+				<includesList>com.qivicon*:*</includesList>
+				<newVersion>${snapshot-build-version}</newVersion>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-versions-plugin</artifactId>
+						<version>${tycho-version}</version>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>release-version</id>
+			<properties>
+				<sprint-number>0</sprint-number>
+				<hotfix-number>0</hotfix-number>
+				<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
+				<release-build-version>1.${sprint-number}.${hotfix-number}.${maven.build.timestamp}</release-build-version>
+				<includesList>com.qivicon*:*</includesList>
+				<newVersion>${release-build-version}</newVersion>
+				<esh.p2.repository.url>http://${nexus.host}/nexus/content/unzip/2ndparty_unzip/org/eclipse/smarthome/products/org.eclipse.smarthome.repo/${esh.version}/org.eclipse.smarthome.repo-${esh.version}.zip-unzip/</esh.p2.repository.url>
+				<!-- until we do not have release version of runtime.crs, qivicon.orbit 
+					and prosyst.repository we use the snapshot versions. Once we release it, 
+					we have to adapt the urls to the release repositories on nexus! -->
+				<runtime.crs.p2.repository.url>http://${nexus.host}/nexus/content/unzip/s_snapshots_unzip/com/qivicon/runtime/crs/com.qivicon.runtime.crs.repository/${runtime.crs.version}/com.qivicon.runtime.crs.repository-${runtime.crs.version}.zip-unzip/</runtime.crs.p2.repository.url>
+				<prosyst.p2.repository.url>http://${nexus.host}/nexus/content/unzip/snapshots_unzip/com/qivicon/runtime/prosyst-repository/${prosyst.repository.version}/prosyst-repository-${prosyst.repository.version}-bin.zip-unzip</prosyst.p2.repository.url>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+					</plugin>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>tycho-versions-plugin</artifactId>
+						<version>${tycho-version}</version>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
+	
+	<repositories>
+		<repository>
+			<id>eclipse_snapshots</id>
+			<name>Eclipse Snapshots</name>
+			<url>https://repo.eclipse.org/content/repositories/snapshots/</url>
+		</repository>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>qivicon-orbit</id>
+			<url>${qivicon.orbit.p2.repository.url}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>p2-sec-snapshots</id>
+			<url>${runtime.crs.p2.repository.url}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>ProSyst Repository</id>
+			<url>${prosyst.p2.repository.url}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>EclipseSmarthome Qivicon</id>
+			<url>${esh.p2.repository.url}</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>Jersey-Optimized</id>
+			<url>${jersey.optimized.p2.repository.url}</url>
+			<layout>p2</layout>
+		</repository>		
+	</repositories>
+	
+	
+	
 </project>

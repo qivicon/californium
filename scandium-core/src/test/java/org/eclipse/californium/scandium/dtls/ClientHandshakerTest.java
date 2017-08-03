@@ -32,9 +32,9 @@ import java.security.GeneralSecurityException;
 import org.eclipse.californium.scandium.category.Small;
 import org.eclipse.californium.scandium.config.DtlsConnectorConfig;
 import org.eclipse.californium.scandium.dtls.CertificateTypeExtension.CertificateType;
-import org.eclipse.californium.scandium.util.ServerName;
-import org.eclipse.californium.scandium.util.ServerName.NameType;
-import org.eclipse.californium.scandium.util.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerName;
+import org.eclipse.californium.scandium.util.api.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerName.NameType;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 

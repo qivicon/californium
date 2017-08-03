@@ -22,8 +22,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.eclipse.californium.scandium.dtls.ServerNameResolver;
-import org.eclipse.californium.scandium.util.ServerName;
-import org.eclipse.californium.scandium.util.ServerNames;
+import org.eclipse.californium.scandium.util.api.ServerName;
+import org.eclipse.californium.scandium.util.api.ServerNames;
 
 /**
  * An in-memory pre-shared-key storage. 
