@@ -138,7 +138,7 @@ public class ManagedServerTest {
 	@Test
 	public void testAddingService() throws Exception {
 		Resource resource = new CoapResource("test");
-		ServiceReference<Resource> ref = mock(ServiceReference.class);
+		ServiceReference ref = mock(ServiceReference.class);
 		when(bundleContext.getService(ref)).thenReturn(resource);
 		managedServer.updated(null);
 		
@@ -151,7 +151,7 @@ public class ManagedServerTest {
 	@Test
 	public void testRemovedService() throws Exception {
 		Resource resource = new CoapResource("test");
-		ServiceReference<Resource> ref = mock(ServiceReference.class);
+		ServiceReference ref = mock(ServiceReference.class);
 		when(bundleContext.getService(ref)).thenReturn(resource);
 		managedServer.updated(null);
 		
