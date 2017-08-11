@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.eclipse.californium</groupId>
 		<artifactId>parent</artifactId>
-		<version>1.0.7-SNAPSHOT</version>
+		<version>1.0.6.QIVICON</version>
 	</parent>
 	<artifactId>californium-osgi</artifactId>
 	<packaging>bundle</packaging>
@@ -17,7 +17,7 @@
 	<description>OSGi wrapper</description>
 
 	<properties>
-		<osgi.version>4.3.1</osgi.version>
+		<osgi.version>4.2.0</osgi.version>
 	</properties>
 	
 	<dependencies>
